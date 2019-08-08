@@ -1,0 +1,12 @@
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe.config
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.pdb
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.dll
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.xml
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csprojAssemblyReference.cache
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CoreCompileInputs.cache
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CopyComplete
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.exe
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.pdb
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.dll
+C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.xml
