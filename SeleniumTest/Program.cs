@@ -4,6 +4,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
+using Wait = SeleniumExtras.WaitHelpers;
 
 namespace SeleniumTest
 {
@@ -12,6 +13,7 @@ namespace SeleniumTest
         private const string UrlLogin = "http://localhost:3000/Login";
         private const string UrlEmpresa = "http://localhost:3000/Empresas/Adicionar";
         private const string UrlArea = "http://localhost:3000/Areas/Adicionar";
+        private const string UrlAmostragem = "http://localhost:3000/AmostragensColaboradorCompetencia/Adicionar";
         private const string Text = "admin@testetechvirtus.com.br";
         private const string Senha = "123456";
 
@@ -28,7 +30,7 @@ namespace SeleniumTest
                 driver.FindElementById("Senha").SendKeys(Senha); //preenchendo senha
                 driver.FindElementById("btnEntrar").Click(); //clicando no botao entrar
 
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("linkSairSistema"))));//aguardando entrar no sistema
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("linkSairSistema"))));//aguardando entrar no sistema
                 Console.WriteLine("Acessou o sistema com sucesso");
             }
             catch (Exception ex)
@@ -41,7 +43,7 @@ namespace SeleniumTest
             try
             {
                 driver.Navigate().GoToUrl(UrlEmpresa); //carregando pagina para adicionar a empresa
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("CPF_CNPJ"))));//aguardando carregamento do elemento da pagina
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("CPF_CNPJ"))));//aguardando carregamento do elemento da pagina
                 Console.WriteLine("Carregou a pagina de adicao da empresa com sucesso");
 
                 //fazendo o 
@@ -55,7 +57,7 @@ namespace SeleniumTest
 
                 //buscando o cnpj
                 driver.FindElementById("btnCnpj").Click();
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists(By.Id("toast-container")));//aguardando carregamento da pagina
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("toast-container")));//aguardando carregamento da pagina
 
                 //adicionando nome fantasia
                 IWebElement nomeFantasia = driver.FindElementById("NomeFantasia");
@@ -87,7 +89,7 @@ namespace SeleniumTest
                 //clicar no botao de submeter
                 driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div[2]/div/div/button").Click();
 
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists(By.Id("empresas")));
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("empresas")));
                 Console.WriteLine("Salvou a empresa com sucesso");
             }
             catch (Exception ex)
@@ -99,8 +101,8 @@ namespace SeleniumTest
             #region Página da Area
             try
             {
-                driver.Navigate().GoToUrl(UrlArea); //carregando pagina para adicionar a area
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Nome"))));
+                driver.Navigate().GoToUrl(UrlArea); //carregando pagina para adicionar a area                
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("Nome"))));
                 Console.WriteLine("Carregou a pagina de adicao da área com sucesso");
 
                 //selecionando o contratante
@@ -117,7 +119,7 @@ namespace SeleniumTest
                 }
 
                 //aguardando a busca
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.InvisibilityOfElementLocated((By.Id("overlay-background"))));
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.InvisibilityOfElementLocated((By.Id("overlay-background"))));
 
                 //adicionando nome da area
                 IWebElement nomeFantasia = driver.FindElementById("Nome");
@@ -127,7 +129,7 @@ namespace SeleniumTest
                 //clicar no botao de submeter
                 driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div[2]/div/div/button").Click();
 
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists(By.Id("divSalvo")));
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("areas")));
                 Console.WriteLine("Salvou a area com sucesso");
             }
             catch (Exception ex)
@@ -136,7 +138,65 @@ namespace SeleniumTest
             }
             #endregion
 
+            #region Página da Amostragem
+            try
+            {
+                //chamar a pagina de amostragem                
+                driver.Navigate().GoToUrl(UrlAmostragem);
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("select2-idTipoAmostragem-container"))));
+                Console.WriteLine("Carregou a pagina de adicao da amostragem com sucesso");
+
+                //escolher tipo de amostragem Valor real
+                IWebElement clickTipo = driver.FindElementById("select2-idTipoAmostragem-container");
+                clickTipo.Click();
+                ReadOnlyCollection<IWebElement> tipos = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement tipo in tipos)
+                {
+                    if (tipo.Text.ToLower() == "valor real")
+                    {
+                        tipo.Click();
+                        break;
+                    }
+                }
+
+                //escolher contratante @Selenium
+                IWebElement clickContratante = driver.FindElementById("select2-IdEmpresa-container");
+                clickContratante.Click();
+                ReadOnlyCollection<IWebElement> contratantes = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement contratante in contratantes)
+                {
+                    if (contratante.Text.ToLower() == "@selenium")
+                    {
+                        contratante.Click();
+                        break;
+                    }
+                }
+
+                //clicando no botao adicionar
+                driver.FindElementById("Adicionar-Faixa").Click();
+                driver.FindElementByClassName("txtQuantidadeAdmitidos").SendKeys("1");
+                driver.FindElementByClassName("txtQuantidadeDemitidos").SendKeys("1");
+                driver.FindElementByClassName("txtQuantidadeAtivos").SendKeys("3");
+                driver.FindElementByClassName("txtFaixaInicial").SendKeys("0");
+                driver.FindElementByClassName("txtFaixaFinal").SendKeys("9999");
+                driver.FindElementByClassName("txtQuantidadeMinima").SendKeys("1");
+
+
+                //clicar no botao de submeter
+                driver.FindElementById("btn-salvar-amostragem").Click();
+
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("amostragenscolaborador")));
+                Console.WriteLine("Salvou a amostragem com sucesso");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Houve o seguinte erro ao tentar adicionar a amostragem: {ex.Message}");
+            }
+            #endregion
+
             Console.WriteLine("Fim");
+
+            //driver.Close();
         }
     }
 }

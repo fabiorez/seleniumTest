@@ -10,3 +10,16 @@ C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.
 C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.pdb
 C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.dll
 C:\Users\frezende\source\repos\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.xml
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe.config
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.pdb
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\SeleniumExtras.WaitHelpers.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.xml
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.xml
+C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CoreCompileInputs.cache
+C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CopyComplete
+C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.exe
+C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.pdb
+C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csprojAssemblyReference.cache
