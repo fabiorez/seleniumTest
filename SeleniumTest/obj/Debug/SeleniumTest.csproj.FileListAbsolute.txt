@@ -22,4 +22,10 @@ C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CoreComp
 C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CopyComplete
 C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.exe
 C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.pdb
-C:\Projetos GIT\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csprojAssemblyReference.cache
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\NUnit3.TestAdapter.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\nunit.engine.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\nunit.engine.api.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\nunit.framework.dll
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\nunit.framework.pdb
+C:\Projetos GIT\SeleniumTest\SeleniumTest\bin\Debug\nunit.framework.xml
