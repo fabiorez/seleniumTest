@@ -14,6 +14,8 @@ namespace SeleniumTest
         private const string UrlEmpresa = "http://localhost:3000/Empresas/Adicionar";
         private const string UrlArea = "http://localhost:3000/Areas/Adicionar";
         private const string UrlAmostragem = "http://localhost:3000/AmostragensColaboradorCompetencia/Adicionar";
+        private const string UrlContratos = "http://localhost:3000/Contratos/Adicionar";
+        private const string UrlConfAnalise = "http://localhost:3000/ConfiguracoesAnaliseCompetencia/Adicionar";
         private const string Text = "admin@testetechvirtus.com.br";
         private const string Senha = "123456";
 
@@ -25,6 +27,7 @@ namespace SeleniumTest
             #region Pagina de Login
             try
             {
+                driver.Manage().Window.Maximize();
                 driver.Navigate().GoToUrl(UrlLogin); //carregando pagina de login
                 driver.FindElementById("Email").SendKeys(Text); //preenchendo email
                 driver.FindElementById("Senha").SendKeys(Senha); //preenchendo senha
@@ -194,7 +197,181 @@ namespace SeleniumTest
             }
             #endregion
 
+            #region Página de Contrato
+            try
+            {
+                //chamar a pagina de contrato                
+                driver.Navigate().GoToUrl(UrlContratos);
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("select2-IdEmpresaCliente-container"))));
+                Console.WriteLine("Carregou a pagina de adicao de contrato com sucesso");
+
+                //escolher a empresa
+                IWebElement clickEmpresa = driver.FindElementById("select2-IdEmpresaCliente-container");
+                clickEmpresa.Click();
+                ReadOnlyCollection<IWebElement> empresas = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement empresa in empresas)
+                {
+                    if (empresa.Text.ToLower() == "@selenium")
+                    {
+                        empresa.Click();
+                        break;
+                    }
+                }
+
+                //aguardando a busca
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.InvisibilityOfElementLocated((By.Id("overlay-background"))));
+
+                //adicionando numero do contrato
+                IWebElement nomeFantasia = driver.FindElementById("Numero");
+                nomeFantasia.Clear();
+                nomeFantasia.SendKeys("Selenium123");
+
+                //escolhendo responsavel do contratante
+                IWebElement clickResponsavel = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div[1]/div[4]/div/div/span/div/button/span");
+                clickResponsavel.Click();
+                IWebElement clickAdmin = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div[1]/div[4]/div/div/span/div/ul/li[3]/a/label");
+                clickAdmin.Click();
+                clickResponsavel.Click();
+
+                //escolhendo a empresa tomadora
+                IWebElement clickTomadora = driver.FindElementById("select2-IdEmpresaTomadora-container");
+                clickTomadora.Click();
+                ReadOnlyCollection<IWebElement> tomadoras = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement tomadora in tomadoras)
+                {
+                    if (tomadora.Text.ToLower() == "@selenium")
+                    {
+                        tomadora.Click();
+                        break;
+                    }
+                }
+
+                //escolhendo a area
+                IWebElement clickArea = driver.FindElementById("select2-IdAreaTomadora-container");
+                clickArea.Click();
+                ReadOnlyCollection<IWebElement> areas = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement area in areas)
+                {
+                    if (area.Text.ToLower() == "selenium")
+                    {
+                        area.Click();
+                        break;
+                    }
+                }
+
+                //escolhendo a prestadora
+                IWebElement clickPrestadora = driver.FindElementById("select2-IdEmpresaPrestadora-container");
+                clickPrestadora.Click();
+                ReadOnlyCollection<IWebElement> prestadoras = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement prestadora in prestadoras)
+                {
+                    if (prestadora.Text.ToLower() == "3ra comercio, consultoria e servicos de informatica ltda - 07.616.010/0001-03")
+                    {
+                        prestadora.Click();
+                        break;
+                    }
+                }
+
+                //escolhendo o tipo de competencia
+                IWebElement clickTipo = driver.FindElementById("select2-IdTipoCompetenciaPadrao-container");
+                clickTipo.Click();
+                ReadOnlyCollection<IWebElement> tipos = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement tipo in tipos)
+                {
+                    if (tipo.Text.ToLower() == "mensal")
+                    {
+                        tipo.Click();
+                        break;
+                    }
+                }
+
+                driver.FindElementById("DescricaoServico").SendKeys("Teste Selenium");
+                driver.FindElementById("LocalServico").SendKeys("Recife");
+                driver.FindElementById("DataInicial").SendKeys("01/01/2019");
+                driver.FindElementById("DataFinal").SendKeys("01/05/2019");
+
+
+                //salvar
+                driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div[2]/div/div/button").Click();
+
+                //aguardando salvar
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("contratacoes")));
+                Console.WriteLine("Salvou o contrato com sucesso");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Houve o seguinte erro ao tentar adicionar o contrato: {ex.Message}");
+            }
+            #endregion
+
+            #region Página de Configuracao Analise
+            try
+            {
+                driver.Navigate().GoToUrl(UrlConfAnalise);
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("select2-IdEmpresa-container"))));
+                Console.WriteLine("Carregou a pagina de adicao de configuracao de Analise");
+
+                //escolher a empresa
+                IWebElement clickEmpresa = driver.FindElementById("select2-IdEmpresa-container");
+                clickEmpresa.Click();
+                ReadOnlyCollection<IWebElement> empresas = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
+                foreach (IWebElement empresa in empresas)
+                {
+                    if (empresa.Text.ToLower() == "@selenium")
+                    {
+                        empresa.Click();
+                        break;
+                    }
+                }
+
+                //adicionando escopo
+                IWebElement clickEscopo = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div/div[1]/div[5]/ul/li[1]/a/span/i");
+                clickEscopo.Click();
+
+                //abrir area do escopo
+                IWebElement clickAreaEscopo = driver.FindElementByXPath("/ html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div/div[1]/div[5]/div/div[1]/div/div/div[1]/ul/li/i[2]");
+                clickAreaEscopo.Click();
+
+                //adicionando caged ao escopo
+                Actions ac = new Actions(driver);
+                IWebElement source = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div/div[1]/div[5]/div/div[1]/div/div/div[2]/ul/li[4]");
+                IWebElement target = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div/div[1]/div[5]/div/div[1]/div/div/div[1]/ul/li/div[2]/ul");
+
+                ac.DragAndDrop(source, target);
+                ac.Build().Perform();
+
+                //busca cartao de ponto
+                Actions ab = new Actions(driver);
+                IWebElement busca = driver.FindElementById("procurar-objeto-analise-mensal");
+                ab.MoveToElement(busca);
+                ab.Click();
+                ab.SendKeys("ponto");
+                ab.Build().Perform();
+
+                //adiciona cartao de ponto
+                Actions ap = new Actions(driver);
+                IWebElement ponto = driver.FindElementByXPath("/html/body/div[3]/div[2]/div/div[3]/div/div/div[2]/form/div/div[1]/div[5]/div/div[1]/div/div/div[2]/ul/li[21]/b/p");
+
+                ap.DragAndDrop(ponto, target);
+                ap.Build().Perform();
+
+                //salvar a configuracao
+                driver.FindElementById("salvar").Click();
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementIsVisible(By.Id("Modal-Informacao")));
+                driver.FindElementById("btn-Salvar-Com-Informacao").Click();
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(Wait.ExpectedConditions.ElementExists(By.Id("configuracoes")));
+                Console.WriteLine("Salvou a configuracao com sucesso");
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"Houve o seguinte erro ao tentar adicionar a análise: {ex.Message}");
+            }
+            #endregion
+
             Console.WriteLine("Fim");
+
+
 
             //driver.Close();
         }
