@@ -1,2 +1,4 @@
 packages
 .vs
+SeleniumTest\bin
+SeleniumTest\obj

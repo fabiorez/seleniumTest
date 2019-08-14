@@ -1,17 +1,17 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using NUnit.Framework;
+using OpenQA.Selenium.Firefox;
 using System;
-using Wait = SeleniumExtras.WaitHelpers;
 
 namespace SeleniumTest
 {
     class Program
     {
+        FirefoxDriver driver = new FirefoxDriver();
         static void Main(string[] args)
         {
             //FirefoxDriver driver = new FirefoxDriver();
 
-            //#region Pagina de Login
+            #region Pagina de Login
             //try
             //{
             //    driver.Navigate().GoToUrl(UrlLogin); //carregando pagina de login
@@ -26,9 +26,9 @@ namespace SeleniumTest
             //{
             //    Console.WriteLine($"Houve o seguinte erro ao tentar acessar o sistema: {ex.Message}");
             //}
-            //#endregion
+            #endregion
 
-            //#region Pagina de empresa
+            #region Pagina de empresa
             //try
             //{
             //    driver.Navigate().GoToUrl(UrlEmpresa); //carregando pagina para adicionar a empresa
@@ -85,9 +85,9 @@ namespace SeleniumTest
             //{
             //    Console.WriteLine($"Houve o seguinte erro ao tentar salvar a empresa: {ex.Message}");
             //}
-            //#endregion
+            #endregion
 
-            //#region Página da Area
+            #region Página da Area
             //try
             //{
             //    driver.Navigate().GoToUrl(UrlArea); //carregando pagina para adicionar a area                
@@ -125,9 +125,9 @@ namespace SeleniumTest
             //{
             //    Console.WriteLine($"Houve o seguinte erro ao tentar adicionar a área: {ex.Message}");
             //}
-            //#endregion
+            #endregion
 
-            //#region Página da Amostragem
+            #region Página da Amostragem
             //try
             //{
             //    //chamar a pagina de amostragem                
@@ -181,27 +181,30 @@ namespace SeleniumTest
             //{
             //    Console.WriteLine($"Houve o seguinte erro ao tentar adicionar a amostragem: {ex.Message}");
             //}
-            //#endregion
+            #endregion
 
-            //Console.WriteLine("Fim");            
+            Console.WriteLine("Fim");
         }
 
         [SetUp]
         public void Initialize()
         {
-            driver.Navigate().GoToUrl(UrlLogin);
+            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html");
             Console.WriteLine("Acessando a pagina");
         }
 
         [Test]
         public void ExecuteTest()
         {
-            driver.Navigate().GoToUrl(UrlLogin);
-            driver.FindElementById("Email").SendKeys(Text);
-            driver.FindElementById("Senha").SendKeys(Senha);
-            driver.FindElementById("btnEntrar").Click();
 
-            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("linkSairSistema"))));
+            //Title
+            SeleniumSetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
+
+            //Initial
+            SeleniumSetMethods.EnterText(driver, "Initial", "executeAutomantion", "Name");
+
+            //Click
+            SeleniumSetMethods.Click(driver, "Save", "Name");
 
             Console.WriteLine("Executando teste");
         }
