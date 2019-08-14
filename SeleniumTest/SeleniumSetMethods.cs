@@ -6,7 +6,6 @@ namespace SeleniumTest
 {
     class SeleniumSetMethods
     {
-
         //EnterText
         public static void EnterText(FirefoxDriver driver, string element, string value, string elementType)
         {

@@ -201,10 +201,14 @@ namespace SeleniumTest
             SeleniumSetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
 
             //Initial
-            SeleniumSetMethods.EnterText(driver, "Initial", "executeAutomantion", "Name");
+            SeleniumSetMethods.EnterText(driver, "Initial", "executeAutomation", "Name");
+
+            Console.WriteLine("The value from my Title is: " + SeleniumGetMethods.GetTextFromDropDown(driver, "TitleId", "Id"));
 
             //Click
             SeleniumSetMethods.Click(driver, "Save", "Name");
+
+            Console.WriteLine("The value from my Initial is: " + SeleniumGetMethods.GetText(driver, "Initial", "Name"));
 
             Console.WriteLine("Executando teste");
         }
