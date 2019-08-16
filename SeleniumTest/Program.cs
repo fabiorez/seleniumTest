@@ -198,21 +198,18 @@ namespace SeleniumTest
         [Test]
         public void ExecuteTest()
         {
+            //initializing page
+            EAPageObject page = new EAPageObject();
+            page.txtInitial.SendKeys("executeAutomation");
+            page.btnSave.Click();
 
-            //Title
-            SeleniumSetMethods.SelectDropDown("TitleId", "Mr.", PropertyType.Id);
-
-            //Initial
-            SeleniumSetMethods.EnterText("Initial", "executeAutomation", PropertyType.Name);
-
-            Console.WriteLine("The value from my Title is: " + SeleniumGetMethods.GetTextFromDropDown("TitleId", PropertyType.Id));
-
-            //Click
-            SeleniumSetMethods.Click("Save", PropertyType.Name);
-
-            Console.WriteLine("The value from my Initial is: " + SeleniumGetMethods.GetText("Initial", PropertyType.Name));
-
-            Console.WriteLine("Executando teste");
+            ////Title
+            //SeleniumSetMethods.SelectDropDown("TitleId", "Mr.", PropertyType.Id);
+            ////Initial
+            //SeleniumSetMethods.EnterText("Initial", "executeAutomation", PropertyType.Name);
+            //Console.WriteLine("The value from my Title is: " + SeleniumGetMethods.GetTextFromDropDown("TitleId", PropertyType.Id));
+            ////Click
+            //SeleniumSetMethods.Click("Save", PropertyType.Name);
         }
 
         [TearDown]
