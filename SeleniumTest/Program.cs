@@ -6,7 +6,7 @@ namespace SeleniumTest
 {
     class Program
     {
-        FirefoxDriver driver = new FirefoxDriver();
+        //FirefoxDriver driver = new FirefoxDriver();
         static void Main(string[] args)
         {
             //FirefoxDriver driver = new FirefoxDriver();
@@ -189,7 +189,9 @@ namespace SeleniumTest
         [SetUp]
         public void Initialize()
         {
-            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html");
+            PropertiesCollection.driver = new FirefoxDriver();
+
+            PropertiesCollection.driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html");
             Console.WriteLine("Acessando a pagina");
         }
 
@@ -198,17 +200,17 @@ namespace SeleniumTest
         {
 
             //Title
-            SeleniumSetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
+            SeleniumSetMethods.SelectDropDown("TitleId", "Mr.", PropertyType.Id);
 
             //Initial
-            SeleniumSetMethods.EnterText(driver, "Initial", "executeAutomation", "Name");
+            SeleniumSetMethods.EnterText("Initial", "executeAutomation", PropertyType.Name);
 
-            Console.WriteLine("The value from my Title is: " + SeleniumGetMethods.GetTextFromDropDown(driver, "TitleId", "Id"));
+            Console.WriteLine("The value from my Title is: " + SeleniumGetMethods.GetTextFromDropDown("TitleId", PropertyType.Id));
 
             //Click
-            SeleniumSetMethods.Click(driver, "Save", "Name");
+            SeleniumSetMethods.Click("Save", PropertyType.Name);
 
-            Console.WriteLine("The value from my Initial is: " + SeleniumGetMethods.GetText(driver, "Initial", "Name"));
+            Console.WriteLine("The value from my Initial is: " + SeleniumGetMethods.GetText("Initial", PropertyType.Name));
 
             Console.WriteLine("Executando teste");
         }
@@ -216,7 +218,7 @@ namespace SeleniumTest
         [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            PropertiesCollection.driver.Close();
             Console.WriteLine("Fechando o browser");
         }
     }
