@@ -191,17 +191,24 @@ namespace SeleniumTest
         {
             PropertiesCollection.driver = new FirefoxDriver();
 
-            PropertiesCollection.driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html");
+            PropertiesCollection.driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
             Console.WriteLine("Acessando a pagina");
         }
 
         [Test]
         public void ExecuteTest()
         {
-            //initializing page
-            EAPageObject page = new EAPageObject();
-            page.txtInitial.SendKeys("executeAutomation");
-            page.btnSave.Click();
+            //Login to Application
+            LoginPageObject pageLogin = new LoginPageObject();
+
+            EAPageObject pageEA = pageLogin.Login("execute", "automation");
+
+            pageEA.FillUserForm("KK", "Karthik", "Automation");
+
+            ////initializing page
+            //EAPageObject page = new EAPageObject();
+            //page.txtInitial.SendKeys("executeAutomation");
+            //page.btnSave.Click();
 
             ////Title
             //SeleniumSetMethods.SelectDropDown("TitleId", "Mr.", PropertyType.Id);
@@ -215,8 +222,8 @@ namespace SeleniumTest
         [TearDown]
         public void CleanUp()
         {
-            PropertiesCollection.driver.Close();
-            Console.WriteLine("Fechando o browser");
+            //PropertiesCollection.driver.Close();
+            //Console.WriteLine("Fechando o browser");
         }
     }
 }
