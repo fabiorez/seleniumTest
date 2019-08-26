@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium.Firefox;
 using System;
+using System.Threading;
 
 namespace SeleniumTest
 {
@@ -203,6 +204,10 @@ namespace SeleniumTest
 
             EAPageObject pageEA = pageLogin.Login("execute", "automation");
 
+            Thread.Sleep(500);
+
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("FirstName"))));
+
             pageEA.FillUserForm("KK", "Karthik", "Automation");
 
             ////initializing page
@@ -222,8 +227,8 @@ namespace SeleniumTest
         [TearDown]
         public void CleanUp()
         {
-            //PropertiesCollection.driver.Close();
-            //Console.WriteLine("Fechando o browser");
+            PropertiesCollection.driver.Close();
+            Console.WriteLine("Fechando o browser");
         }
     }
 }
