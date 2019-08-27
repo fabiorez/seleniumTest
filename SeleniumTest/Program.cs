@@ -149,13 +149,13 @@ namespace SeleniumTest
                 new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("select2-idTipoAmostragem-container"))));
                 Console.WriteLine("Carregou a pagina de adicao da amostragem com sucesso");
 
-                //escolher tipo de amostragem Valor real
+                //escolher tipo de amostragem Valor percentual
                 IWebElement clickTipo = driver.FindElementById("select2-idTipoAmostragem-container");
                 clickTipo.Click();
                 ReadOnlyCollection<IWebElement> tipos = driver.FindElementsByXPath("/html/body/span/span/span[2]/ul/li");
                 foreach (IWebElement tipo in tipos)
                 {
-                    if (tipo.Text.ToLower() == "valor real")
+                    if (tipo.Text.ToLower() == "valor percentual")
                     {
                         tipo.Click();
                         break;
@@ -177,12 +177,12 @@ namespace SeleniumTest
 
                 //clicando no botao adicionar
                 driver.FindElementById("Adicionar-Faixa").Click();
-                driver.FindElementByClassName("txtQuantidadeAdmitidos").SendKeys("1");
-                driver.FindElementByClassName("txtQuantidadeDemitidos").SendKeys("1");
-                driver.FindElementByClassName("txtQuantidadeAtivos").SendKeys("3");
+                driver.FindElementByClassName("txtQuantidadeAdmitidos").SendKeys("20");
+                driver.FindElementByClassName("txtQuantidadeDemitidos").SendKeys("20");
+                driver.FindElementByClassName("txtQuantidadeAtivos").SendKeys("60");
                 driver.FindElementByClassName("txtFaixaInicial").SendKeys("0");
                 driver.FindElementByClassName("txtFaixaFinal").SendKeys("9999");
-                driver.FindElementByClassName("txtQuantidadeMinima").SendKeys("1");
+                driver.FindElementByClassName("txtQuantidadeMinima").SendKeys("10");
 
 
                 //clicar no botao de submeter
