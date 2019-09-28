@@ -18,22 +18,24 @@ namespace SeleniumTest
         private const string UrlConfAnalise = "http://localhost:3000/ConfiguracoesAnaliseCompetencia/Adicionar";
         private const string Text = "admin@testetechvirtus.com.br";
         private const string Senha = "123456";
+        private const int aguardar = 10;
 
         static void Main(string[] args)
         {
-            FirefoxDriver firefoxDriver = new FirefoxDriver();
-            FirefoxDriver driver = firefoxDriver;
+            FirefoxDriver driver = new FirefoxDriver();
 
             #region Pagina de Login
             try
             {
                 driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl(UrlLogin); //carregando pagina de login
-                driver.FindElementById("Email").SendKeys(Text); //preenchendo email
-                driver.FindElementById("Senha").SendKeys(Senha); //preenchendo senha
-                driver.FindElementById("btnEntrar").Click(); //clicando no botao entrar
+                driver.Navigate().GoToUrl(UrlLogin);
+                driver.FindElementById("Email").SendKeys(Text);
+                driver.FindElementById("Senha").SendKeys(Senha);
+                driver.FindElementById("btnEntrar").Click();
 
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("linkSairSistema"))));//aguardando entrar no sistema
+                new WebDriverWait(driver, TimeSpan.FromSeconds(aguardar))
+                    .Until(Wait.ExpectedConditions.ElementExists((By.Id("linkSairSistema"))));
+                
                 Console.WriteLine("Acessou o sistema com sucesso");
             }
             catch (Exception ex)
@@ -45,15 +47,14 @@ namespace SeleniumTest
             #region Pagina de empresa
             try
             {
-                driver.Navigate().GoToUrl(UrlEmpresa); //carregando pagina para adicionar a empresa
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(Wait.ExpectedConditions.ElementExists((By.Id("CPF_CNPJ"))));//aguardando carregamento do elemento da pagina
+                driver.Navigate().GoToUrl(UrlEmpresa); 
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                    .Until(Wait.ExpectedConditions.ElementExists((By.Id("CPF_CNPJ"))));
                 Console.WriteLine("Carregou a pagina de adicao da empresa com sucesso");
 
-                //fazendo o 
-                //aqui tive que fazer por action por causa do javascript maldito que faz placeholder e nao libera o botao se nao teclar
                 Actions actions = new Actions(driver);
-                IWebElement cpf_cnpj = driver.FindElementById("CPF_CNPJ");
-                actions.MoveToElement(cpf_cnpj);
+                IWebElement cpfCnpj = driver.FindElementById("CPF_CNPJ");
+                actions.MoveToElement(cpfCnpj);
                 actions.Click();
                 actions.SendKeys("09.509.531/0010-70");
                 actions.Build().Perform();
